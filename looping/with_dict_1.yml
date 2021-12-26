@@ -1,0 +1,18 @@
+---
+-
+  hosts: dev
+  user: ansible
+  become: true
+  tasks:
+    - name: Creating user
+      user:
+        name: "{{ item.key }}"
+        comment: "{{ item.value.full_name }}"
+        state: absent
+      with_dict: 
+        Manjith: 
+          full_name: Manjith Kumar
+        Karthick: 
+          full_name: Karthick Kumar
+        Murali: 
+          full_name: Murali Kumar

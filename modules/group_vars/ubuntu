@@ -1,0 +1,4 @@
+---
+ansible_become: ansible
+ansible_become_pass: ansible
+...

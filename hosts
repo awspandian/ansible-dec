@@ -1,0 +1,10 @@
+[controler]
+172.31.1.171
+[ubuntu]
+172.31.3.48
+[redhat]
+172.31.9.29
+[dev:children]
+ubuntu
+redhat
+

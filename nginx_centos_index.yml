@@ -1,0 +1,35 @@
+---
+-
+  hosts: all 
+  user: ansible
+  become: true
+  tasks:
+    - name: Install EPEL
+      yum:
+        name: epel-release
+        update_cache: yes
+        state: latest
+      when: ansible_distribution == 'CentOS'  
+
+    - name: Install Nginx
+      package:
+        name: nginx
+        state: latest
+
+    - name: Restart nginx
+      service:
+        name: nginx
+        state: restarted
+      notify: Check HTTP Service
+
+    - name: Template index.html-base.j2 to index.html on target
+      template:
+        src: index.html-base.j2
+        dest: "/usr/share/nginx/html/index.html"
+        mode: 0644
+
+  handlers:
+    - name: Check HTTP Service
+      uri:
+        url: http://{{ ansible_default_ipv4.address }}
+        status_code: 200 

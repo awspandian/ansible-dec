@@ -1,0 +1,11 @@
+---
+-
+  hosts: ubuntu
+  user: ansible
+  become: true
+  tasks:
+    - name: Create hex sequence directories
+      file:
+        dest: "{{ item }}"
+        state: directory
+      with_sequence: count=5 format=/home/lakshmi/count_sequence_%x
